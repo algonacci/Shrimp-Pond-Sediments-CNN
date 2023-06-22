@@ -1,0 +1,3 @@
+0 tidak_ada_endapan
+1 sedikit_endapan
+2 banyak_endapan
