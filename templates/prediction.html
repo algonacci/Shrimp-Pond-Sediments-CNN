@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitoring Endapan Tambak Udang</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="#">Monitoring Endapan Tambak Udang</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+    <div class="container p-5 min-vh-100">
+        {% if error %}
+        <div class="alert alert-danger" role="alert">{{ error }}</div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Input Gambar</h2>
+                <form action="/prediction" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="pakan"
+                            placeholder="Masukkan Pakan Dalam Satuan Kilogram" required />
+                        <br />
+                        <input type="number" class="form-control" name="usia" placeholder="Masukkan Usia Dalam Hari"
+                            required />
+                        <br />
+                        <label for="photo">Pilih Gambar:</label>
+                        <input type="file" name="image" onchange="loadFile(event)" class="form-control" required />
+                    </div>
+                    <div class="col-lg-12 justify-content-center d-flex p-3">
+                        <img id="output" width="50%" height="50%" />
+                    </div>
+                    <div class="row justify-content-center text-center">
+                        <div class="col-lg-6 mt-3 mb-3">
+                            <input class="btn btn-primary mt-3" type="submit" value="Prediksi!" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Hasil Prediksi</h2>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <div class="card-body text-center">
+                                <p class="card-text">Status Endapan</p>
+                                <p class="card-text">Status</p>
+                                {% if result %}
+                                <h5 class="card-title">Kelas: {{ result }}</h5>
+                                <h5 class="card-title">Kelas: {{ label }}</h5>
+                                <h6>{{ result }}</h6>
+                                {% else %}
+                                <h5 class="card-title"></h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="card mb-3">
+                            <div class="card-body text-center">
+                                <p class="card-text">Waktu untuk membersihkan pond site</p>
+                                {% if shift_pond is not none %}
+                                <h5 class="card-title">
+                                    {{ shift_pond }} Hari {% if shift_date %} <br />
+                                    ({{ shift_date.strftime("%d %B %Y")}}) {% endif %}
+                                </h5>
+                                {% else %}
+                                <h5 class="card-title"></h5>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center bg-dark p-3">
+        <p class="mt-2 text-white">Copyright 2023</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
+    <script src="static/script.js"></script>
+</body>
+
+</html>
