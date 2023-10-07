@@ -29,9 +29,11 @@
                 <h2>Input Gambar</h2>
                 <form action="/prediction" method="post" enctype="multipart/form-data">
                     <div class="form-group">
+                        <label for="pakan">Satuan Pakan Dalam Kilogram</label>
                         <input type="number" class="form-control" name="pakan"
                             placeholder="Masukkan Pakan Dalam Satuan Kilogram" required />
                         <br />
+                        <label for="usia">Usia Udang Dalam Hari</label>
                         <input type="number" class="form-control" name="usia" placeholder="Masukkan Usia Dalam Hari"
                             required />
                         <br />
@@ -55,7 +57,6 @@
                         <div class="card mb-3">
                             <div class="card-body text-center">
                                 <p class="card-text">Status Endapan</p>
-                                <p class="card-text">Status</p>
                                 {% if result %}
                                 <h5 class="card-title">Kelas: {{ result }}</h5>
                                 <h5 class="card-title">Kelas: {{ label }}</h5>
